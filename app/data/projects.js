@@ -179,7 +179,7 @@ export const projects = [
     demo: 'https://www.linkedin.com/posts/muhammad-zain-azhar_hackathon-ai-startups-activity-7324169880667148288-1QSu',
     detail: '/projects/startup-copilot',
     description: 'Weekend-built AI copilot that validates startup ideas, compiles market research, and assembles investor-ready pitch materials in minutes.',
-    technologies: ['Streamlit', 'FastAPI', 'Python', 'LangChain', 'OpenAI GPT-4', 'flask', 'matplotlib'],
+    technologies: ['Streamlit', 'FastAPI', 'Python', 'LangChain', 'OpenAI GPT-4', '', 'matplotlib'],
     caseStudy: {
       overview: 'Startup Copilot is an AI assistant we prototyped at the AI Genesis hackathon to help founders move from idea to investor conversations faster.',
       problem: [
