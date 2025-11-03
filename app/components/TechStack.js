@@ -34,7 +34,7 @@ export default function TechStack() {
     { name: 'Matplotlib', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/matplotlib/matplotlib-original.svg', category: 'AI/ML' },
     { name: 'LangChain', icon: 'https://avatars.githubusercontent.com/u/126733545?s=200&v=4', category: 'AI/ML' },
     { name: 'OpenAI', icon: 'https://static.vecteezy.com/system/resources/previews/022/227/364/non_2x/openai-chatgpt-logo-icon-free-png.png', category: 'AI/ML' },
-    { name: 'Render', icon: 'https://cdn.worldvectorlogo.com/logos/render.svg', category: 'Backend' },
+    { name: 'Render', icon: 'https://cdn.worldvectorlogo.com/logos.svg', category: 'Backend' },
     { name: 'Railway', icon: 'https://railway.app/brand/logo-light.png', category: 'Backend' },
     { name: 'Transformers', icon: 'https://huggingface.co/front/assets/huggingface_logo-noborder.svg', category: 'AI/ML' },
     { name: 'Gemini API', icon: 'https://www.gstatic.com/lamda/images/gemini_sparkle_v002_d4735304ff6292a690345.svg', category: 'AI/ML' },
