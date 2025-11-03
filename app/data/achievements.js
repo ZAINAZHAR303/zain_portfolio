@@ -53,7 +53,7 @@ export const achievements = [
   },
   {
     title: 'Career-Prep Fellow',
-    organization: 'Amal Academy —Fellowship',
+    organization: 'Amal Academy — Fellowship',
     period: 'Apr 2025 – Jul 2025',
     location: 'Faisalabad, PK',
     summary:
