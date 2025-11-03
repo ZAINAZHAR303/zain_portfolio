@@ -280,7 +280,7 @@ export default function WorldMap() {
         </div>
 
         {/* Recent Visitors List */}
-        {visitors.length > 0 && (
+        {/* {visitors.length > 0 && (
           <div className="mt-8">
             <h4 className="text-lg font-semibold text-gray-700 mb-4">Recent Visitors</h4>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 max-h-32 overflow-y-auto">
@@ -297,7 +297,7 @@ export default function WorldMap() {
               ))}
             </div>
           </div>
-        )}
+        )} */}
       </div>
     </div>
   );
