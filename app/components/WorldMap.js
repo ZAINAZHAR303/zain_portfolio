@@ -264,7 +264,7 @@ export default function WorldMap() {
         </div>
 
         {/* Stats */}
-        <div className="mt-8 grid grid-cols-2 gap-6">
+        {/* <div className="mt-8 grid grid-cols-2 gap-6">
           <div className="bg-gradient-to-br from-blue-50 to-purple-50 p-6 rounded-xl">
             <p className="text-4xl font-bold bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent">
               {uniqueCountries}
@@ -277,7 +277,7 @@ export default function WorldMap() {
             </p>
             <p className="text-gray-600 mt-1">Total Visitors</p>
           </div>
-        </div>
+        </div> */}
 
         {/* Recent Visitors List */}
         {/* {visitors.length > 0 && (
