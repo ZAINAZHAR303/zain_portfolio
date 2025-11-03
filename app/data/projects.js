@@ -9,7 +9,7 @@ export const projects = [
     demo: 'https://hireflow-frontend-opal.vercel.app/',
     detail: '/projects/hireflow',
     description: 'Agentic job-search copilot that matches roles, rewrites resumes, autofills applications, and prepares interviews so candidates reclaim their time.',
-    technologies: ['Next.js', 'Tailwind CSS', 'Node.js', 'MongoDB', 'Google Gemini 2.0', 'LangChain', 'LangGraph', 'Puppeteer', 'Cloudinary'],
+    technologies: ['Next.js', 'Tailwind CSS', 'Node.js', 'MongoDB', 'Google Gemini 2.0', 'LangChain', 'LangGraph', 'Puppeteer'],
     caseStudy: {
       overview: 'HireFlow is an agentic job-application assistant my team and I built to automate the repetitive grind of job hunting, from role discovery through interview prep.',
       problem: [
