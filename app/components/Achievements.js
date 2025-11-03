@@ -11,7 +11,7 @@ export default function Achievements() {
             Achievements & Journey
           </span>
           <h2 className="text-4xl font-bold bg-gradient-to-r from-purple-500 via-blue-500 to-cyan-500 bg-clip-text text-transparent">
-            Milestones With Proof
+            Milestones
           </h2>
           <p className="text-gray-600 max-w-2xl mx-auto">
             A snapshot of recognitions, global competitions, and community impact moments that shaped my path.
