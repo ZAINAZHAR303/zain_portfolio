@@ -45,7 +45,7 @@ export default function Sidebar() {
     <aside className="fixed left-0 top-0 h-screen w-64 bg-white/80 backdrop-blur-lg border-r border-gray-200 shadow-xl flex flex-col p-6">
       {/* Profile Section */}
       <div className="flex flex-col items-center mb-8">
-        <div className="w-32 h-32 rounded-full overflow-hidden mb-4 border-4 border-gradient-to-r from-blue-400 to-purple-500 shadow-lg">
+        <div className="w-40 h-32 rounded-full overflow-hidden mb-4 border-4 border-gradient-to-r from-blue-400 to-purple-500 shadow-lg">
           <Image
             src="/nobg.png"
             alt="Zain Azhar"
