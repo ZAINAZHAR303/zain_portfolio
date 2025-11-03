@@ -137,7 +137,7 @@ export const projects = [
     demo: 'https://www.linkedin.com/posts/muhammad-zain-azhar_hackathonjourney-aiforgood-signlanguage-activity-7289663209228136448-Mfp2',
     detail: '/projects/signify',
     description: 'Web app that captures sign-language gestures over webcam, renders text instantly, and speaks the translation to bridge communication gaps.',
-    technologies: ['TensorFlow', 'pythorch', 'Flask', 'React', 'Tailwind CSS', 'Web Speech API', 'WebSockets'],
+    technologies: ['TensorFlow', 'PyTorch', 'Flask', 'React', 'Tailwind CSS', 'Web Speech API', 'WebSockets'],
     caseStudy: {
       overview: 'Signify helps people who do not know sign language understand conversations by translating gestures into spoken words in real time.',
       problem: [
