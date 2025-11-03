@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import {
   ref,
   push,
@@ -13,6 +13,8 @@ import { database } from '../lib/firebase';
 export default function WorldMap() {
   const [visitors, setVisitors] = useState([]);
   const [totalVisitors, setTotalVisitors] = useState(0);
+  const [hoveredVisitor, setHoveredVisitor] = useState(null);
+  const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
     if (!database) {
@@ -46,6 +48,8 @@ export default function WorldMap() {
           lat: Number.isFinite(lat) ? lat : null,
           lng: Number.isFinite(lng) ? lng : null,
           timestamp: new Date().toISOString(),
+          source: 'ipapi',
+          ip: data.ip ?? null,
         };
 
         await push(ref(database, 'visitors'), visitorRecord);
@@ -73,8 +77,9 @@ export default function WorldMap() {
     return { x, y };
   };
 
-  // Get unique countries
-  const uniqueCountries = [...new Set(visitors.map(v => v.country))].filter(Boolean).length;
+  const uniqueCountries = useMemo(() => {
+    return [...new Set(visitors.map((v) => v.country))].filter(Boolean).length;
+  }, [visitors]);
 
   return (
     <div className="w-full max-w-5xl mx-auto my-20">
@@ -105,7 +110,20 @@ export default function WorldMap() {
           </div>
           
           {/* Visitor dots overlay */}
-          <svg viewBox="0 0 800 400" className="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg">
+          <svg
+            viewBox="0 0 800 400"
+            className="absolute inset-0 w-full h-full"
+            xmlns="http://www.w3.org/2000/svg"
+            onMouseMove={(event) => {
+              const boundingRect = event.currentTarget.getBoundingClientRect();
+              const x = event.clientX - boundingRect.left;
+              const y = event.clientY - boundingRect.top;
+              setTooltipPosition({ x, y });
+            }}
+            onMouseLeave={() => {
+              setHoveredVisitor(null);
+            }}
+          >
             {/* Visitor Dots with Ping Animation */}
             {visitors.map((visitor, index) => {
               if (!Number.isFinite(visitor.lat) || !Number.isFinite(visitor.lng)) {
@@ -115,7 +133,16 @@ export default function WorldMap() {
               const delay = index * 0.1;
               
               return (
-                <g key={visitor.id || index}>
+                <g
+                  key={visitor.id || index}
+                  onMouseEnter={() => {
+                    setHoveredVisitor({
+                      country: visitor.country ?? 'Unknown',
+                      city: visitor.city ?? 'Unknown',
+                      timestamp: visitor.timestamp,
+                    });
+                  }}
+                >
                   {/* Outer ping circle */}
                   <circle
                     cx={pos.x}
@@ -161,12 +188,29 @@ export default function WorldMap() {
                       begin={`${delay}s`}
                       fill="freeze"
                     />
-                    <title>{`${visitor.city || 'Unknown'}, ${visitor.country || 'Unknown'}`}</title>
                   </circle>
                 </g>
               );
             })}
           </svg>
+
+          {hoveredVisitor && (
+            <div
+              className="pointer-events-none absolute rounded-xl bg-white/90 px-4 py-3 text-sm shadow-xl border border-purple-100"
+              style={{
+                left: Math.min(Math.max(tooltipPosition.x + 16, 16), 760),
+                top: Math.min(Math.max(tooltipPosition.y + 16, 16), 360),
+              }}
+            >
+              <p className="font-semibold text-gray-800">{hoveredVisitor.city}</p>
+              <p className="text-gray-600">{hoveredVisitor.country}</p>
+              {hoveredVisitor.timestamp && (
+                <p className="text-xs text-gray-500 mt-1">
+                  {new Date(hoveredVisitor.timestamp).toLocaleString()}
+                </p>
+              )}
+            </div>
+          )}
 
           {/* Zoom controls styled like the image */}
           <div className="absolute bottom-6 left-6 flex flex-col gap-1 bg-white rounded shadow-lg">
