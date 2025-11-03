@@ -57,19 +57,19 @@ export default function Achievements() {
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 gap-4 self-center">
+              <div className="grid grid-cols-2 gap-3 self-center">
                 {achievement.proofs.slice(0, 4).map((proof) => (
                   <Link
                     key={proof}
                     href={`/achievements/${proof}`}
                     target="_blank"
-                    className="relative block aspect-[4/5] overflow-hidden rounded-3xl border border-purple-100 shadow-md transition-transform duration-300 hover:scale-105"
+                    className="relative block aspect-square overflow-hidden rounded-2xl border border-purple-100 shadow-md transition-transform duration-300 hover:scale-105"
                   >
                     <Image
                       src={`/achievements/${proof}`}
                       alt={`${achievement.title} proof`}
                       fill
-                      sizes="(min-width: 768px) 24vw, 60vw"
+                      sizes="(min-width: 768px) 20vw, 40vw"
                       className="object-cover"
                       priority={false}
                     />
