@@ -52,7 +52,7 @@ export const projects = [
     demo: 'https://www.linkedin.com/posts/muhammad-zain-azhar_ai-deepseek-deepconsent-activity-7297348914851028993-gQmI',
     detail: '/projects/deepconsent',
     description: 'Hackathon-built assistant that drafts legally aligned consent agreements with DeepSeek LLM tooling, cutting review time for compliance teams.',
-    technologies: ['Next.js', 'Tailwind CSS', 'FastAPI', 'PostgreSQL', 'DeepSeek API', 'LangChain', 'JWT'],
+    technologies: ['Next.js', 'Tailwind CSS', 'FastAPI', 'PostgreSQL', 'DeepSeek API', 'LangChain'],
     caseStudy: {
       overview: 'DeepConsent is the prototype we shipped at the Fall in Love with DeepSeek hackathon to automate the way organizations generate consent agreements.',
       problem: [
