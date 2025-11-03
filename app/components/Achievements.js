@@ -47,22 +47,24 @@ export default function Achievements() {
                 </ul>
 
                 <div className="flex flex-wrap gap-3 pt-2">
-                  {achievement.proofs.map((proof) => (
-                    <Link
-                      key={proof}
-                      href={`/achievements/${proof}`}
-                      target="_blank"
-                      className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 px-5 py-2 text-sm font-semibold text-white shadow-lg transition-all duration-300 hover:shadow-xl"
-                    >
-                      View Proof
-                    </Link>
-                  ))}
+                  <Link
+                    href={`/achievements/${achievement.proofs[0]}`}
+                    target="_blank"
+                    className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 px-5 py-2 text-sm font-semibold text-white shadow-lg transition-all duration-300 hover:shadow-xl"
+                  >
+                    View Gallery
+                  </Link>
                 </div>
               </div>
 
               <div className="grid grid-cols-2 gap-3 self-center">
                 {achievement.proofs.slice(0, 4).map((proof) => (
-                  <div key={proof} className="relative aspect-square overflow-hidden rounded-2xl border border-purple-100 shadow-md">
+                  <Link
+                    key={proof}
+                    href={`/achievements/${proof}`}
+                    target="_blank"
+                    className="relative block aspect-square overflow-hidden rounded-2xl border border-purple-100 shadow-md transition-transform duration-300 hover:scale-105"
+                  >
                     <Image
                       src={`/achievements/${proof}`}
                       alt={`${achievement.title} proof`}
@@ -71,7 +73,7 @@ export default function Achievements() {
                       className="object-cover"
                       priority={false}
                     />
-                  </div>
+                  </Link>
                 ))}
               </div>
             </article>
