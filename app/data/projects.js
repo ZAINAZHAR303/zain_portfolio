@@ -94,7 +94,7 @@ export const projects = [
     demo: 'https://hackathon-y.streamlit.app/',
     detail: '/projects/gaia',
     description: 'Safety companion for women that chats like a friend, triggers emergency workflows, and maps high-risk London zones from live incident data.',
-    technologies: ['Streamlit', 'Python', 'OpenAI GPT-4', 'Twilio', 'Leaflet', 'Pandas', 'GeoJSON'],
+    technologies: ['Streamlit', 'Python', 'OpenAI GPT-4', 'Twilio', '', 'Pandas', 'GeoJSON'],
     caseStudy: {
       overview: 'Gaia is a web companion we built to give women travelling alone a calm presence, fast help triggers, and situational awareness.',
       problem: [
