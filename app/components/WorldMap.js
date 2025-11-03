@@ -16,6 +16,52 @@ export default function WorldMap() {
   const [hoveredVisitor, setHoveredVisitor] = useState(null);
   const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 });
 
+  const ipapiToken = process.env.NEXT_PUBLIC_IPAPI_TOKEN;
+
+  const fetchVisitorGeo = async () => {
+    const ipapiBase = 'https://ipapi.co/json/';
+    const ipapiUrl = ipapiToken ? `${ipapiBase}?token=${ipapiToken}` : ipapiBase;
+
+    try {
+      const response = await fetch(ipapiUrl, { cache: 'no-store' });
+      if (response.ok) {
+        const payload = await response.json();
+        return {
+          city: payload.city ?? null,
+          country: payload.country_name ?? null,
+          latitude: Number(payload.latitude),
+          longitude: Number(payload.longitude),
+          ip: payload.ip ?? null,
+          source: 'ipapi',
+        };
+      }
+    } catch (error) {
+      console.warn('ipapi request failed, falling back to ipwho.is', error);
+    }
+
+    const fallbackUrl = 'https://ipwho.is/?fields=ip,success,city,country,latitude,longitude';
+    try {
+      const response = await fetch(fallbackUrl, { cache: 'no-store' });
+      if (response.ok) {
+        const payload = await response.json();
+        if (payload.success !== false) {
+          return {
+            city: payload.city ?? null,
+            country: payload.country ?? null,
+            latitude: Number(payload.latitude),
+            longitude: Number(payload.longitude),
+            ip: payload.ip ?? null,
+            source: 'ipwho',
+          };
+        }
+      }
+    } catch (error) {
+      console.error('Fallback geolocation request failed', error);
+    }
+
+    throw new Error('Unable to resolve visitor location');
+  };
+
   useEffect(() => {
     if (!database) {
       return;
@@ -33,23 +79,18 @@ export default function WorldMap() {
 
     const trackVisitor = async () => {
       try {
-        const response = await fetch('https://ipapi.co/json/');
-        if (!response.ok) {
-          throw new Error(`Geolocation request failed with ${response.status}`);
-        }
-
-        const data = await response.json();
-        const lat = Number(data.latitude);
-        const lng = Number(data.longitude);
+        const geo = await fetchVisitorGeo();
+        const lat = Number(geo.latitude);
+        const lng = Number(geo.longitude);
 
         const visitorRecord = {
-          country: data.country_name ?? null,
-          city: data.city ?? null,
+          country: geo.country ?? null,
+          city: geo.city ?? null,
           lat: Number.isFinite(lat) ? lat : null,
           lng: Number.isFinite(lng) ? lng : null,
           timestamp: new Date().toISOString(),
-          source: 'ipapi',
-          ip: data.ip ?? null,
+          source: geo.source,
+          ip: geo.ip ?? null,
         };
 
         await push(ref(database, 'visitors'), visitorRecord);
