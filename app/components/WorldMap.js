@@ -166,73 +166,72 @@ export default function WorldMap() {
             }}
           >
             {/* Visitor Dots with Ping Animation */}
-            {visitors.map((visitor, index) => {
-              if (!Number.isFinite(visitor.lat) || !Number.isFinite(visitor.lng)) {
-                return null;
-              }
-              const pos = projectToMap(visitor.lat, visitor.lng);
-              const delay = index * 0.1;
+            {visitors
+              .filter((visitor) => Number.isFinite(visitor.lat) && Number.isFinite(visitor.lng))
+              .map((visitor, index) => {
+                const pos = projectToMap(visitor.lat, visitor.lng);
+                const delay = index * 0.1;
               
-              return (
-                <g
-                  key={visitor.id || index}
-                  onMouseEnter={() => {
-                    setHoveredVisitor({
-                      country: visitor.country ?? 'Unknown',
-                      city: visitor.city ?? 'Unknown',
-                      timestamp: visitor.timestamp,
-                    });
-                  }}
-                >
-                  {/* Outer ping circle */}
-                  <circle
-                    cx={pos.x}
-                    cy={pos.y}
-                    r="0"
-                    fill="#FFA500"
-                    opacity="0.6"
+                return (
+                  <g
+                    key={visitor.id || index}
+                    onMouseEnter={() => {
+                      setHoveredVisitor({
+                        country: visitor.country ?? 'Unknown',
+                        city: visitor.city ?? 'Unknown',
+                        timestamp: visitor.timestamp,
+                      });
+                    }}
                   >
-                    <animate
-                      attributeName="r"
-                      from="0"
-                      to="15"
-                      dur="2s"
-                      begin={`${delay}s`}
-                      repeatCount="indefinite"
-                    />
-                    <animate
-                      attributeName="opacity"
-                      from="0.8"
-                      to="0"
-                      dur="2s"
-                      begin={`${delay}s`}
-                      repeatCount="indefinite"
-                    />
-                  </circle>
-                  
-                  {/* Main dot */}
-                  <circle
-                    cx={pos.x}
-                    cy={pos.y}
-                    r="6"
-                    fill="#FFA500"
-                    stroke="#FFF"
-                    strokeWidth="1.5"
-                    className="cursor-pointer"
-                    opacity="0"
-                  >
-                    <animate
-                      attributeName="opacity"
-                      from="0"
-                      to="1"
-                      dur="0.5s"
-                      begin={`${delay}s`}
-                      fill="freeze"
-                    />
-                  </circle>
-                </g>
-              );
-            })}
+                    {/* Outer ping circle */}
+                    <circle
+                      cx={pos.x}
+                      cy={pos.y}
+                      r="0"
+                      fill="#FFA500"
+                      opacity="0.5"
+                    >
+                      <animate
+                        attributeName="r"
+                        from="0"
+                        to="10"
+                        dur="2s"
+                        begin={`${delay}s`}
+                        repeatCount="indefinite"
+                      />
+                      <animate
+                        attributeName="opacity"
+                        from="0.7"
+                        to="0"
+                        dur="2s"
+                        begin={`${delay}s`}
+                        repeatCount="indefinite"
+                      />
+                    </circle>
+                    
+                    {/* Main dot */}
+                    <circle
+                      cx={pos.x}
+                      cy={pos.y}
+                      r="4"
+                      fill="#FFA500"
+                      stroke="#FFF"
+                      strokeWidth="1"
+                      className="cursor-pointer"
+                      opacity="0"
+                    >
+                      <animate
+                        attributeName="opacity"
+                        from="0"
+                        to="1"
+                        dur="0.5s"
+                        begin={`${delay}s`}
+                        fill="freeze"
+                      />
+                    </circle>
+                  </g>
+                );
+              })}
           </svg>
 
           {hoveredVisitor && (
