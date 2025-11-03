@@ -122,6 +122,46 @@ export default function WorldMap() {
     return [...new Set(visitors.map((v) => v.country))].filter(Boolean).length;
   }, [visitors]);
 
+  const getVisitLabel = (timestamp) => {
+    if (!timestamp) {
+      return 'Visit time unknown';
+    }
+
+    const visitDate = new Date(timestamp);
+    if (Number.isNaN(visitDate.getTime())) {
+      return 'Visit time unknown';
+    }
+
+    const now = new Date();
+    const diffMs = now.getTime() - visitDate.getTime();
+    if (diffMs < 0) {
+      return visitDate.toLocaleDateString(undefined, {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric',
+      });
+    }
+
+    const diffMinutes = diffMs / (1000 * 60);
+    if (diffMinutes < 60) {
+      return 'Visited moments ago';
+    }
+
+    const diffDays = Math.floor(diffMinutes / (60 * 24));
+    if (diffDays === 0) {
+      return 'Visited earlier today';
+    }
+    if (diffDays < 30) {
+      return `Visited ${diffDays} day${diffDays === 1 ? '' : 's'} ago`;
+    }
+
+    return visitDate.toLocaleDateString(undefined, {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric',
+    });
+  };
+
   return (
     <div className="w-full max-w-5xl mx-auto my-20">
       <div className="bg-white/80 backdrop-blur-lg rounded-3xl shadow-2xl p-8">
@@ -180,6 +220,7 @@ export default function WorldMap() {
                         country: visitor.country ?? 'Unknown',
                         city: visitor.city ?? 'Unknown',
                         timestamp: visitor.timestamp,
+                        label: getVisitLabel(visitor.timestamp),
                       });
                     }}
                   >
@@ -245,9 +286,7 @@ export default function WorldMap() {
               <p className="font-semibold text-gray-800">{hoveredVisitor.city}</p>
               <p className="text-gray-600">{hoveredVisitor.country}</p>
               {hoveredVisitor.timestamp && (
-                <p className="text-xs text-gray-500 mt-1">
-                  {new Date(hoveredVisitor.timestamp).toLocaleString()}
-                </p>
+                <p className="text-xs text-gray-500 mt-1">{hoveredVisitor.label}</p>
               )}
             </div>
           )}
