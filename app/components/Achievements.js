@@ -10,7 +10,7 @@ export default function Achievements() {
           <span className="inline-flex items-center px-4 py-2 text-sm font-semibold uppercase tracking-wider text-purple-600 bg-purple-100/70 rounded-full">
             Achievements & Journey
           </span>
-          <h2 className="text-4xl upper font-bold bg-gradient-to-r from-purple-500 via-blue-500 to-cyan-500 bg-clip-text text-transparent">
+          <h2 className="text-4xl uppercase font-bold bg-gradient-to-r from-purple-500 via-blue-500 to-cyan-500 bg-clip-text text-transparent">
             Milestones
           </h2>
           <p className="text-gray-600 max-w-2xl mx-auto">
