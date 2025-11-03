@@ -263,7 +263,7 @@ export default function WorldMap() {
           </div>
         </div>
 
-        Stats
+        {/* Stats */}
         <div className="mt-8 grid grid-cols-2 gap-6">
           <div className="bg-gradient-to-br from-blue-50 to-purple-50 p-6 rounded-xl">
             <p className="text-4xl font-bold bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent">
