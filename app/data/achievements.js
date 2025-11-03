@@ -42,7 +42,7 @@ export const achievements = [
     title: 'Community Educator, Web Dev & IELTS',
     organization: 'Volunteer Initiative',
     period: '2024 – Present',
-    location: 'Faisalabad, PK',
+    
     summary:
       'Designed and delivered over 30 hours of free Web Development and IELTS coaching for underprivileged students.',
     highlights: [
